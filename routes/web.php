@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FullCalendarController@index')->name('index');
+
+Route::get('/load-events', 'EventController@loadEvents')->name('loadEvents');
+
+
 
 Auth::routes();
 
