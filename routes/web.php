@@ -13,10 +13,9 @@
 
 Route::get('/', 'FullCalendarController@index')->name('index');
 
-Route::get('/load-events', 'EventController@loadEvents')->name('loadEvents');
+Route::get('/load-events', 'EventController@loadEvents')->name('routeLoadEvents');
 
+Route::put('/event-update', 'EventController@update')->name('routeEventUpdate');
 
+Route::post('/event-store', 'EventController@store')->name('routeEventStore');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
