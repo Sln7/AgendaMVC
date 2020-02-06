@@ -15,6 +15,7 @@
 </head>
 <body>
 @include('fullcalendar.modal-calendar')
+@include('fullcalendar.modal-fastEvents')
 <div id='wrap'>
 
     <div id='external-events'>
@@ -33,7 +34,8 @@
 
         <p>
             <input type='checkbox' id='drop-remove' />
-            <label for='drop-remove'>remove after drop</label>
+            <label for='drop-remove'>remover após arrastar</label>
+            <button class="btn btn-sm btn-success" id="newFastEvent">Criar novo evento</button>
         </p>
     </div>
 

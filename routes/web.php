@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'FullCalendarController@index')->name('index');
 
 Route::get('/load-events', 'EventController@loadEvents')->name('routeLoadEvents');
@@ -23,3 +12,10 @@ Route::delete('/event-destroy', 'EventController@destroy')->name('routeEventDele
 
 Route::delete('/fast-event-destroy', 'FastEventController@destroy')->name('routeFastEventDelete');
 
+/*
+ *
+ *  Rotas para eventos rápidos
+ */
+Route::delete('/fast-event-destroy', 'FastEventController@destroy')->name('routeFastEventDelete');
+Route::put('/fast-event-update', 'FastEventController@update')->name('routeFastEventUpdate');
+Route::post('/fast-event-store', 'FastEventController@store')->name('routeFastEventStore');

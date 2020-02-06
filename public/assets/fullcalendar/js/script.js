@@ -1,11 +1,83 @@
 $(function () {
 
     $('.date-time').mask('00/00/0000 00:00:00');
+    $('.time').mask('00:00:00');
 
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+
+    $("#newFastEvent").click(function () {
+
+        clearMessages('.message');
+        resetForm("#formFastEvent");
+
+        $('#modalFastEvent').modal('show');
+        $("#modalFastEvent #titleModal").text('Criar Evento Rápido');
+        $("#modalFastEvent button.deleteFastEvent").css("display","none");
+
+    })
+
+    $('.fc-event').click(function () {
+
+        clearMessages('.message');
+        resetForm("#formFastEvent");
+
+        let Event = JSON.parse($(this).attr('data-event'));
+
+        $('#modalFastEvent').modal('show');
+        $("#modalFastEvent #titleModal").text('Alterar Evento Rápido');
+        $("#modalFastEvent button.deleteFastEvent").css("display","flex");
+
+        $("#modalFastEvent input[name='id']").val(Event.id);
+        $("#modalFastEvent input[name='title']").val(Event.title);
+        $("#modalFastEvent input[name='start']").val(Event.start);
+        $("#modalFastEvent input[name='end']").val(Event.end);
+        $("#modalFastEvent input[name='color']").val(Event.color);
+
+    });
+
+    $(".saveFastEvent").click(function () {
+
+        let id = $("#modalFastEvent input[name='id']").val();
+        let title = $("#modalFastEvent input[name='title']").val();
+        let start = $("#modalFastEvent input[name='start']").val();
+        let end = $("#modalFastEvent input[name='end']").val();
+        let color = $("#modalFastEvent input[name='color']").val();
+
+        let Event = {
+            title: title,
+            start: start,
+            end: end,
+            color: color,
+        };
+
+        let route;
+
+        if(id == ''){
+            route = routeEvents('routeFastEventStore');
+        }else{
+            route = routeEvents('routeFastEventUpdate');
+            Event.id = id;
+            Event._method = 'PUT';
+        }
+
+        sendEvent(route,Event);
+
+    });
+
+    $(".deleteFastEvent").click(function () {
+        let id = $("#modalFastEvent input[name='id']").val();
+
+        let Event = {
+            id: id,
+            _method: 'DELETE'
+        };
+
+        let route = routeEvents('routeFastEventDelete');
+        sendEvent(route,Event);
     });
 
     $(".deleteEvent").click(function () {
@@ -70,7 +142,7 @@ function sendEvent(route, data_) {
         error:function (json) {
             let responseJSON = json.responseJSON.errors;
 
-            $("#message").html(loadErrors(responseJSON));
+            $(".message").html(loadErrors(responseJSON));
         }
     });
 }
