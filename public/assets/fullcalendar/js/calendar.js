@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (document.getElementById('drop-remove').checked) {
                 element.draggedEl.parentNode.removeChild(element.draggedEl);
+
+                Event._method = "DELETE"
+                sendEvent(routeEvents('routeFastEventDelete'), Event);
             }
 
             let start = moment(`${element.dateStr} ${Event.start}`).format("YYYY-MM-DD HH:mm:ss");
@@ -44,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Event.end = end;
 
             delete Event.id;
+            delete Event._method;
 
             sendEvent(routeEvents('routeEventStore'), Event);
         },
