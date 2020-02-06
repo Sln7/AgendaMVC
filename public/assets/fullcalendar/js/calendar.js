@@ -29,12 +29,23 @@ document.addEventListener('DOMContentLoaded', function() {
         selectable: true,
         editable: true,
         droppable: true, // this allows things to be dropped onto the calendar
-        drop: function(arg) {
-            // is the "remove after drop" checkbox checked?
+        drop: function(element) {
+
+            let Event = JSON.parse(element.draggedEl.dataset.event);
+
             if (document.getElementById('drop-remove').checked) {
-                // if so, remove the element from the "Draggable Events" list
-                arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                element.draggedEl.parentNode.removeChild(element.draggedEl);
             }
+
+            let start = moment(`${element.dateStr} ${Event.start}`).format("YYYY-MM-DD HH:mm:ss");
+            let end = moment(`${element.dateStr} ${Event.end}`).format("YYYY-MM-DD HH:mm:ss");
+
+            Event.start = start;
+            Event.end = end;
+
+            delete Event.id;
+
+            sendEvent(routeEvents('routeEventStore'), Event);
         },
         eventDrop: function (element) {
 
@@ -43,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let newEvent = {
                 _method:'PUT',
+                title: element.event.title,
                 id: element.event.id,
                 start: start,
                 end: end
@@ -52,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         },
         eventClick: function (element) {
+            clearMessages('#message');
             resetForm("#formEvent");
 
             $("#modalCalendar").modal('show');
@@ -84,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let newEvent = {
                 _method:'PUT',
+                title: element.event.title,
                 id: element.event.id,
                 start: start,
                 end: end
@@ -93,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         select: function (element) {
+            clearMessages("#message");
             resetForm("#formEvent");
 
             $("#modalCalendar").modal('show');
