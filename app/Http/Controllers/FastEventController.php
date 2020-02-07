@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\FastEvent;
-use Illuminate\Http\Request;
 use App\Http\Requests\FastEventRequest;
-
+use Illuminate\Http\Request;
 
 class FastEventController extends Controller
 {
@@ -20,9 +19,9 @@ class FastEventController extends Controller
     public function store(FastEventRequest $request)
     {
         FastEvent::create($request->all());
-
         return response()->json(true);
     }
+
 
     public function update(FastEventRequest $request)
     {

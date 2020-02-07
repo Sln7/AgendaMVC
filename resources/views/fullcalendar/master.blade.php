@@ -45,6 +45,8 @@
          data-route-event-store="{{ route('routeEventStore') }}"
          data-route-event-delete="{{ route('routeEventDelete') }}"
          data-route-fast-event-delete="{{ route('routeFastEventDelete') }}"
+         data-route-fast-event-store="{{ route('routeFastEventStore') }}"
+         data-route-fast-event-update="{{ route('routeFastEventUpdate') }}"
     ></div>
 
 

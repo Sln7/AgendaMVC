@@ -39,34 +39,6 @@ $(function () {
 
     });
 
-    $(".saveFastEvent").click(function () {
-
-        let id = $("#modalFastEvent input[name='id']").val();
-        let title = $("#modalFastEvent input[name='title']").val();
-        let start = $("#modalFastEvent input[name='start']").val();
-        let end = $("#modalFastEvent input[name='end']").val();
-        let color = $("#modalFastEvent input[name='color']").val();
-
-        let Event = {
-            title: title,
-            start: start,
-            end: end,
-            color: color,
-        };
-
-        let route;
-
-        if(id == ''){
-            route = routeEvents('routeFastEventStore');
-        }else{
-            route = routeEvents('routeFastEventUpdate');
-            Event.id = id;
-            Event._method = 'PUT';
-        }
-
-        sendEvent(route,Event);
-
-    });
 
     $(".deleteFastEvent").click(function () {
         let id = $("#modalFastEvent input[name='id']").val();
@@ -90,6 +62,36 @@ $(function () {
 
         let route = routeEvents('routeEventDelete');
         sendEvent(route,Event);
+    });
+
+    $(".saveFastEvent").click(function () {
+
+        let id = $("#modalFastEvent input[name='id']").val();
+        let title = $("#modalFastEvent input[name='title']").val();
+        let start = $("#modalFastEvent input[name='start']").val();
+        let end = $("#modalFastEvent input[name='end']").val();
+        let color = $("#modalFastEvent input[name='color']").val();
+
+        let Event = {
+            title: title,
+            start: start,
+            end: end,
+            color: color,
+        };
+
+        let route;
+
+        if(id == ''){
+            route = routeEvents('routeFastEventStore');
+
+        }else{
+            route = routeEvents('routeFastEventUpdate');
+            Event.id = id;
+            Event._method = 'PUT';
+        }
+
+        sendEvent(route,Event);
+
     });
 
     $(".saveEvent").click(function () {
@@ -141,8 +143,7 @@ function sendEvent(route, data_) {
         },
         error:function (json) {
             let responseJSON = json.responseJSON.errors;
-
-            $(".message").html(loadErrors(responseJSON));
+            $('.message').html(loadErrors(responseJSON));
         }
     });
 }
