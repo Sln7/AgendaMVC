@@ -19,7 +19,7 @@
 <div id='wrap'>
 
     <div id='external-events'>
-        <h4>Draggable Events</h4>
+        <h4>Pendentes de confirmação</h4>
 
         <div id='external-events-list'>
             @if($fastEvents)
