@@ -3,7 +3,7 @@
 Desenvolvido para abstrair as principais funções do FullCalendar. Não possui sistema de usuário e/ou autenticação.
 
 ## Criar/Insert
--Inserção de eventos pode ser feita através do clique na data desejada ou através de eventos rápidos, ambos através de um pequeno crud aberto em uma modal. 
+-Inserção de eventos pode ser feita através do clique na data desejada ou através de eventos rápidos, ambos através de um pequeno form aberto em uma modal. 
 
 ## Alterar/Update
 -Automatico ao arrastar, redimensionar ou clicar no evento.
